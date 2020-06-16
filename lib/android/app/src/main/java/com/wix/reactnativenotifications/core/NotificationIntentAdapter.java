@@ -22,9 +22,11 @@ public class NotificationIntentAdapter {
     public static boolean canHandleIntent(Intent intent) {
         if (intent != null) {
             Bundle notificationData = intent.getExtras();
-            if (notificationData != null && intent.hasExtra(PUSH_NOTIFICATION_EXTRA_NAME)) {
-                return true;
-            }
+            if (notificationData != null &&
+                     (intent.hasExtra(PUSH_NOTIFICATION_EXTRA_NAME) ||
+                             notificationData.getString("google.message_id", null) != null)) {
+                 return true;
+             }
         }
 
         return false;
